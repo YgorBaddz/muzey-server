@@ -369,6 +369,72 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
+  collectionName: 'specialties';
+  info: {
+    displayName: 'Specialty';
+    pluralName: 'specialties';
+    singularName: 'specialty';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::specialty.specialty'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    teachers: Schema.Attribute.Relation<'manyToMany', 'api::teacher.teacher'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
+  collectionName: 'teachers';
+  info: {
+    description: '';
+    displayName: 'Teacher';
+    pluralName: 'teachers';
+    singularName: 'teacher';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::teacher.teacher'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    period_end: Schema.Attribute.Date;
+    period_start: Schema.Attribute.Date;
+    photos: Schema.Attribute.Media<'images' | 'files', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    specialties: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty.specialty'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -878,6 +944,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::specialty.specialty': ApiSpecialtySpecialty;
+      'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

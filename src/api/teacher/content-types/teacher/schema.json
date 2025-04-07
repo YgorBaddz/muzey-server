@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teachers",
+  "info": {
+    "singularName": "teacher",
+    "pluralName": "teachers",
+    "displayName": "Teacher",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "period_start": {
+      "type": "date"
+    },
+    "period_end": {
+      "type": "date"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "specialties": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specialty.specialty",
+      "inversedBy": "teachers"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}
