@@ -369,9 +369,43 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSpecialtyCategorySpecialtyCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'specialty_categories';
+  info: {
+    displayName: 'Specialty Category';
+    pluralName: 'specialty-categories';
+    singularName: 'specialty-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::specialty-category.specialty-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    specialties: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty.specialty'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
   collectionName: 'specialties';
   info: {
+    description: '';
     displayName: 'Specialty';
     pluralName: 'specialties';
     singularName: 'specialty';
@@ -390,7 +424,12 @@ export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    photos: Schema.Attribute.Media<'images' | 'files', true>;
     publishedAt: Schema.Attribute.DateTime;
+    specialty_categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty-category.specialty-category'
+    >;
     teachers: Schema.Attribute.Relation<'manyToMany', 'api::teacher.teacher'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -944,6 +983,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::specialty-category.specialty-category': ApiSpecialtyCategorySpecialtyCategory;
       'api::specialty.specialty': ApiSpecialtySpecialty;
       'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::content-releases.release': PluginContentReleasesRelease;

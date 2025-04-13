@@ -4,7 +4,8 @@
   "info": {
     "singularName": "specialty",
     "pluralName": "specialties",
-    "displayName": "Specialty"
+    "displayName": "Specialty",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,20 @@
       "relation": "manyToMany",
       "target": "api::teacher.teacher",
       "mappedBy": "specialties"
+    },
+    "specialty_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specialty-category.specialty-category",
+      "inversedBy": "specialties"
+    },
+    "photos": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
