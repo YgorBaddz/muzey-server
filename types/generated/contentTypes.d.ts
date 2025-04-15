@@ -369,13 +369,49 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiSpecialtyCategorySpecialtyCategory
+export interface ApiCurrentStaffCurrentStaff
   extends Struct.CollectionTypeSchema {
-  collectionName: 'specialty_categories';
+  collectionName: 'current_staffs';
   info: {
-    displayName: 'Specialty Category';
-    pluralName: 'specialty-categories';
-    singularName: 'specialty-category';
+    description: '';
+    displayName: 'current-staff';
+    pluralName: 'current-staffs';
+    singularName: 'current-staff';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::current-staff.current-staff'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    period_start: Schema.Attribute.Date;
+    photos: Schema.Attribute.Media<'images', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    specialties: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty.specialty'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGraduateGraduate extends Struct.CollectionTypeSchema {
+  collectionName: 'graduates';
+  info: {
+    displayName: 'graduate';
+    pluralName: 'graduates';
+    singularName: 'graduate';
   };
   options: {
     draftAndPublish: true;
@@ -387,18 +423,15 @@ export interface ApiSpecialtyCategorySpecialtyCategory
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::specialty-category.specialty-category'
+      'api::graduate.graduate'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    photos: Schema.Attribute.Media<'files' | 'images', true>;
     publishedAt: Schema.Attribute.DateTime;
-    specialties: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::specialty.specialty'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    year: Schema.Attribute.String;
   };
 }
 
@@ -417,6 +450,10 @@ export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    current_staffs: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::current-staff.current-staff'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -426,14 +463,45 @@ export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     photos: Schema.Attribute.Media<'images' | 'files', true>;
     publishedAt: Schema.Attribute.DateTime;
-    specialty_categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::specialty-category.specialty-category'
-    >;
     teachers: Schema.Attribute.Relation<'manyToMany', 'api::teacher.teacher'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiStudentSpringStudentSpring
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'student_springs';
+  info: {
+    description: '';
+    displayName: 'achievements';
+    pluralName: 'student-springs';
+    singularName: 'student-spring';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    isSciense: Schema.Attribute.Boolean;
+    isSport: Schema.Attribute.Boolean;
+    isStudentSpring: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::student-spring.student-spring'
+    > &
+      Schema.Attribute.Private;
+    photos: Schema.Attribute.Media<'images', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    year: Schema.Attribute.Date;
   };
 }
 
@@ -468,6 +536,70 @@ export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::specialty.specialty'
     >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVeteranJobVeteranJob extends Struct.CollectionTypeSchema {
+  collectionName: 'veteran_jobs';
+  info: {
+    description: '';
+    displayName: 'veteran-job';
+    pluralName: 'veteran-jobs';
+    singularName: 'veteran-job';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::veteran-job.veteran-job'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    period_end: Schema.Attribute.Date;
+    period_start: Schema.Attribute.Date;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWarCompetitorWarCompetitor
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'war_competitors';
+  info: {
+    description: '';
+    displayName: 'war-competitor';
+    pluralName: 'war-competitors';
+    singularName: 'war-competitor';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::war-competitor.war-competitor'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    photos: Schema.Attribute.Media<'images', true>;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -983,9 +1115,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::specialty-category.specialty-category': ApiSpecialtyCategorySpecialtyCategory;
+      'api::current-staff.current-staff': ApiCurrentStaffCurrentStaff;
+      'api::graduate.graduate': ApiGraduateGraduate;
       'api::specialty.specialty': ApiSpecialtySpecialty;
+      'api::student-spring.student-spring': ApiStudentSpringStudentSpring;
       'api::teacher.teacher': ApiTeacherTeacher;
+      'api::veteran-job.veteran-job': ApiVeteranJobVeteranJob;
+      'api::war-competitor.war-competitor': ApiWarCompetitorWarCompetitor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

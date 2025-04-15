@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_springs",
+  "info": {
+    "singularName": "student-spring",
+    "pluralName": "student-springs",
+    "displayName": "achievements",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "year": {
+      "type": "date"
+    },
+    "isStudentSpring": {
+      "type": "boolean"
+    },
+    "isSport": {
+      "type": "boolean"
+    },
+    "isSciense": {
+      "type": "boolean"
+    }
+  }
+}

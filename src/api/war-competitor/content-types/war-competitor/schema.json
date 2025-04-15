@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "war_competitors",
+  "info": {
+    "singularName": "war-competitor",
+    "pluralName": "war-competitors",
+    "displayName": "war-competitor",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "photos": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

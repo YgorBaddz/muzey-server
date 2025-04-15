@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "current_staffs",
+  "info": {
+    "singularName": "current-staff",
+    "pluralName": "current-staffs",
+    "displayName": "current-staff",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "period_start": {
+      "type": "date"
+    },
+    "description": {
+      "type": "text"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "specialties": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specialty.specialty",
+      "inversedBy": "current_staffs"
+    }
+  }
+}
