@@ -23,6 +23,13 @@
     },
     "period_end": {
       "type": "date"
+    },
+    "photos": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

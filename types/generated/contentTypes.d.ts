@@ -604,6 +604,7 @@ export interface ApiVeteranJobVeteranJob extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     period_end: Schema.Attribute.Date;
     period_start: Schema.Attribute.Date;
+    photos: Schema.Attribute.Media<'images', true>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
