@@ -34,6 +34,12 @@
       "relation": "manyToMany",
       "target": "api::current-staff.current-staff",
       "mappedBy": "specialties"
+    },
+    "specialty_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specialty-category.specialty-category",
+      "mappedBy": "specialties"
     }
   }
 }

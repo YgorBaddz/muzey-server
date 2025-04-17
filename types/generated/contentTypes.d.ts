@@ -435,6 +435,39 @@ export interface ApiGraduateGraduate extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSpecialtyCategorySpecialtyCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'specialty_categories';
+  info: {
+    displayName: 'Specialty-category';
+    pluralName: 'specialty-categories';
+    singularName: 'specialty-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::specialty-category.specialty-category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    specialties: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty.specialty'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
   collectionName: 'specialties';
   info: {
@@ -463,6 +496,10 @@ export interface ApiSpecialtySpecialty extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     photos: Schema.Attribute.Media<'images' | 'files', true>;
     publishedAt: Schema.Attribute.DateTime;
+    specialty_categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::specialty-category.specialty-category'
+    >;
     teachers: Schema.Attribute.Relation<'manyToMany', 'api::teacher.teacher'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1117,6 +1154,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::current-staff.current-staff': ApiCurrentStaffCurrentStaff;
       'api::graduate.graduate': ApiGraduateGraduate;
+      'api::specialty-category.specialty-category': ApiSpecialtyCategorySpecialtyCategory;
       'api::specialty.specialty': ApiSpecialtySpecialty;
       'api::student-spring.student-spring': ApiStudentSpringStudentSpring;
       'api::teacher.teacher': ApiTeacherTeacher;
