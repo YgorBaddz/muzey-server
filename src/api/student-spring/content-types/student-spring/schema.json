@@ -34,6 +34,12 @@
     },
     "isSciense": {
       "type": "boolean"
+    },
+    "isProfessional": {
+      "type": "boolean"
+    },
+    "isWorldSkills": {
+      "type": "boolean"
     }
   }
 }
